@@ -17,3 +17,4 @@ TODO:
 - Better Map
 - Head Bob
 - Multiple levels
+- Variable height walls(Doom Style!)
