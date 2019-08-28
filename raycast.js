@@ -1,4 +1,4 @@
-const TILE_SIZE = 16;
+const TILE_SIZE = 24;
 const MAP_NUM_ROWS = 23;//20
 const MAP_NUM_COLS = 23;//21
 
@@ -423,9 +423,10 @@ function render3DProjectedWalls() {
       
     }
 
+	noStroke();
     fill(0,0,60);
     rect(
-           i * WALL_STRIP_WIDTH,
+           (i) * WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2),
            WALL_STRIP_WIDTH,
            WINDOW_HEIGHT
@@ -433,19 +434,19 @@ function render3DProjectedWalls() {
     
     fill(0,0,0);
     rect(
-           i * WALL_STRIP_WIDTH,
+           (i) * WALL_STRIP_WIDTH,
            0,
            WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2)
         );
-
-    fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
+	
+	fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
     
         
-        noStroke();
+        
         // render a rectangle with the calculated wall height
         rect(
-           i * WALL_STRIP_WIDTH,
+           (i) * WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
            WALL_STRIP_WIDTH,
            wallStripHeight
