@@ -23,7 +23,7 @@ var markery = 0;
 let img;
 
 function preload(){
-	img = loadImage("walltex.gif");
+	img = loadImage("assets/walltex.gif");
 }
 
 class Map {
