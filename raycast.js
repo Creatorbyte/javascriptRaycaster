@@ -12,7 +12,7 @@ const FOV_ANGLE = 60 * (Math.PI / 180);
 const WALL_STRIP_WIDTH = 1;
 const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
 const CONST_MINIMAP_SCALE_FACTOR = 0.25;
-var MINIMAP_SCALE_FACTOR = 0.5;
+var MINIMAP_SCALE_FACTOR = 0.1;
 
 var markerx = 0;
 var markery = 0;
@@ -30,8 +30,8 @@ class Map {
     constructor() {
 		this.grid = [
 			[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-		        [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,-1],
-		        [-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
+		    [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,-1],
+		    [-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
 			[-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
 			[-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
 			[-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
@@ -85,7 +85,7 @@ class Map {
         var mapGridIndexY = Math.floor(y / TILE_SIZE);
         return this.grid[mapGridIndexY][mapGridIndexX];
     }
-  
+
 	 setWallContentAt(x,y,c){
 		if(this.getWallContentAt(x,c) !=null) {
 			var xn = Math.floor(x / TILE_SIZE);
@@ -93,7 +93,7 @@ class Map {
 			this.grid[yn][xn]=c;
 		}
 	 }
-  
+
     render() {
         for (var i = 0; i < MAP_NUM_ROWS; i++) {
             for (var j = 0; j < MAP_NUM_COLS; j++) {
@@ -183,7 +183,7 @@ class Ray {
         var xstep, ystep;
 
         //HORIZONTAL RAY-GRID INTERSECTION
-		
+
         var foundHorzWallHit = false;
         var horzWallHitX = 0;
         var horzWallHitY = 0;
@@ -223,7 +223,7 @@ class Ray {
         }
 
         //VERTICAL RAY-GRID INTERSECTION
-		
+
         var foundVertWallHit = false;
         var vertWallHitX = 0;
         var vertWallHitY = 0;
@@ -284,11 +284,11 @@ class Ray {
             this.hitWallColor = horzWallColor;
             this.wasHitVertical = false;
         }
-   
-	  
+
+
       if(this.Id == Math.floor(NUM_RAYS/2) && player.breakNearestBlock != 0){
 		console.log("tried to change")
-		
+
 		if(player.breakNearestBlock == 1 && grid.getWallContentAt(this.wallHitX+(2)*cos(this.rayAngle), this.wallHitY+(2)*sin(this.rayAngle))!=-1){
 			grid.setWallContentAt(this.wallHitX+(2)*cos(this.rayAngle), this.wallHitY+(2)*sin(this.rayAngle),0);
 		}else if(player.breakNearestBlock == 2){
@@ -298,13 +298,13 @@ class Ray {
 		}
         player.breakNearestBlock = 0;
       }
-    
+
     }
     render() {
 		if(ray.Id != Math.floor(NUM_RAYS/2)) {
-			
+
 			stroke("rgba(255, 255, 0, 0.025)");
-			line(  
+			line(
 				MINIMAP_SCALE_FACTOR * player.x,
 				MINIMAP_SCALE_FACTOR * player.y,
 				MINIMAP_SCALE_FACTOR * this.wallHitX,
@@ -314,14 +314,14 @@ class Ray {
 			console.log(""+ray.Id);
 			//strokeWeight(2);
 			stroke(0, 255, 0);
-			
+
 			line(
 				MINIMAP_SCALE_FACTOR * player.x,
 				MINIMAP_SCALE_FACTOR * player.y,
 				MINIMAP_SCALE_FACTOR * this.wallHitX,
 				MINIMAP_SCALE_FACTOR * this.wallHitY
 			);
-			
+
 			circle(
 				MINIMAP_SCALE_FACTOR * this.wallHitX,
 				MINIMAP_SCALE_FACTOR * this.wallHitY,
@@ -360,7 +360,7 @@ function keyPressed() {
   }else if(keyCode == 67){
     player.breakNearestBlock = 3;
   }
-  
+
   if(keyCode == 77){
 	  if(MINIMAP_SCALE_FACTOR == 1){
 		  MINIMAP_SCALE_FACTOR = CONST_MINIMAP_SCALE_FACTOR;
@@ -427,11 +427,11 @@ function render3DProjectedWalls() {
         var colorG =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
         var colorB =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 200 : ray.hitWallColor == 2 ? 180 : ray.hitWallColor == 3 ? 160 : 255;
         } else {
-      
+
         var colorR =  ray.hitWallColor == -1 ? 180 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
         var colorG =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
         var colorB =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 190 : ray.hitWallColor == 2 ? 170 : ray.hitWallColor == 3 ? 150 : 255;
-      
+
     }
 
 	noStroke();
@@ -442,7 +442,7 @@ function render3DProjectedWalls() {
            WALL_STRIP_WIDTH,
            WINDOW_HEIGHT
         );
-    
+
     fill(0,0,0);
     rect(
            (i) * WALL_STRIP_WIDTH,
@@ -450,23 +450,23 @@ function render3DProjectedWalls() {
            WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2)
         );
-	
-	let sampleX = Math.abs(ray.wallHitX - Math.floor(ray.wallHitX));
+
+	let sampleX = Math.abs(this.ray.wallHitX - Math.floor(this.ray.wallHitX));
                     if (sampleX < 0.001 || sampleX > 0.999) {
-                        sampleX = Math.abs(ray.wallHitY - Math.floor(ray.wallHitY));
+                        sampleX = Math.abs(this.ray.wallHitY - Math.floor(this.ray.wallHitY));
                     }
-	
+
 		imageMode(CENTER);
 		blocktex = img;
-		
+
 		image(blocktex,
 			(i) * WALL_STRIP_WIDTH,
-			0,
+			(WINDOW_HEIGHT / 2) ,//- (wallStripHeight/4)
 			WALL_STRIP_WIDTH,
-			wallStripHeight/2,
-			int(sampleX * blocktex.width), 
-			0, 
-			1, 
+			wallStripHeight,
+			int(sampleX * blocktex.width),
+			0,
+			1,
 			blocktex.height);
 			// draw alpha modified black rects over the texture
 			// to simulate darkness at distance
@@ -475,14 +475,14 @@ function render3DProjectedWalls() {
 			// render a rectangle with the calculated wall height
 			/*
 			fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
-			
+
 			rect(
 			   (i) * WALL_STRIP_WIDTH,
 			   (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
 			   WALL_STRIP_WIDTH,
 			   wallStripHeight
 			);*/
-			
+
 			//image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
 		}
 }
@@ -504,7 +504,7 @@ function distanceBetweenPoints(x1, y1, x2, y2) {
 function setup() {
 	//img = loadImage("walltex.gif");
     createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT);
-	
+
 }
 
 function update() {
