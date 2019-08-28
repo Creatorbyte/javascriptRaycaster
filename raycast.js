@@ -2,6 +2,8 @@ const TILE_SIZE = 24;
 const MAP_NUM_ROWS = 23;//20
 const MAP_NUM_COLS = 23;//21
 
+const mod = (p, q) => (p % q + q) % q;
+
 const WINDOW_WIDTH = MAP_NUM_COLS * TILE_SIZE;
 const WINDOW_HEIGHT = MAP_NUM_ROWS * TILE_SIZE;
 
@@ -14,6 +16,15 @@ var MINIMAP_SCALE_FACTOR = 1;
 
 var markerx = 0;
 var markery = 0;
+
+/**
+ * @type {p5.Image[]}
+ */
+let img;
+
+function preload(){
+	img = loadImage("walltex.gif");
+}
 
 class Map {
     constructor() {
@@ -440,19 +451,43 @@ function render3DProjectedWalls() {
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2)
         );
 	
-	fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
-    
-        
-        
-        // render a rectangle with the calculated wall height
-        rect(
-           (i) * WALL_STRIP_WIDTH,
-           (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
-           WALL_STRIP_WIDTH,
-           wallStripHeight
-        );
-    
-    }
+	let sampleX = Math.abs(ray.wallHitX - Math.floor(ray.wallHitX));
+                    if (sampleX < 0.001 || sampleX > 0.999) {
+                        sampleX = Math.abs(ray.wallHitY - Math.floor(ray.wallHitY));
+                    }
+	
+		imageMode(CENTER);
+		blocktex = img;
+		/*
+		image(blocktex,
+			(i) * WALL_STRIP_WIDTH,
+			(WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
+			WALL_STRIP_WIDTH,
+			wallStripHeight,
+			int(sampleX * blocktex.width), 
+			0, 
+			1, 
+			blocktex.height);*/
+		// draw alpha modified black rects over the texture
+		// to simulate darkness at distance
+		//fill(0, map(1 / d, 0, 1, 255, 0));
+		//rect((i + 0.5) * raywidth, 0, raywidth, height / d);
+				
+				// render a rectangle with the calculated wall height
+			
+			
+			
+			fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
+			
+			rect(
+			   (i) * WALL_STRIP_WIDTH,
+			   (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
+			   WALL_STRIP_WIDTH,
+			   wallStripHeight
+			);
+			
+			//image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
+		}
 }
 
 function normalizeAngle(angle) {
@@ -467,8 +502,12 @@ function distanceBetweenPoints(x1, y1, x2, y2) {
     return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
+
+
 function setup() {
+	//img = loadImage("walltex.gif");
     createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT);
+	
 }
 
 function update() {
