@@ -1,4 +1,4 @@
-const TILE_SIZE = 24;
+const TILE_SIZE = 16;
 const MAP_NUM_ROWS = 23;//20
 const MAP_NUM_COLS = 23;//21
 
@@ -12,7 +12,7 @@ const FOV_ANGLE = 60 * (Math.PI / 180);
 const WALL_STRIP_WIDTH = 1;
 const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
 const CONST_MINIMAP_SCALE_FACTOR = 0.25;
-var MINIMAP_SCALE_FACTOR = 1;
+var MINIMAP_SCALE_FACTOR = 0.5;
 
 var markerx = 0;
 var markery = 0;
@@ -461,9 +461,9 @@ function render3DProjectedWalls() {
 		
 		image(blocktex,
 			(i) * WALL_STRIP_WIDTH,
-			(WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
+			0,
 			WALL_STRIP_WIDTH,
-			wallStripHeight,
+			wallStripHeight/2,
 			int(sampleX * blocktex.width), 
 			0, 
 			1, 
@@ -483,7 +483,7 @@ function render3DProjectedWalls() {
 			   wallStripHeight
 			);*/
 			
-			image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
+			//image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
 		}
 }
 
