@@ -30,8 +30,8 @@ class Map {
     constructor() {
 		this.grid = [
 			[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-            [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,-1],
-            [-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
+		        [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,-1],
+		        [-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
 			[-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
 			[-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
 			[-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,-1],
@@ -458,7 +458,7 @@ function render3DProjectedWalls() {
 	
 		imageMode(CENTER);
 		blocktex = img;
-		/*
+		
 		image(blocktex,
 			(i) * WALL_STRIP_WIDTH,
 			(WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
@@ -467,16 +467,13 @@ function render3DProjectedWalls() {
 			int(sampleX * blocktex.width), 
 			0, 
 			1, 
-			blocktex.height);*/
-		// draw alpha modified black rects over the texture
-		// to simulate darkness at distance
-		//fill(0, map(1 / d, 0, 1, 255, 0));
-		//rect((i + 0.5) * raywidth, 0, raywidth, height / d);
-				
-				// render a rectangle with the calculated wall height
-			
-			
-			
+			blocktex.height);
+			// draw alpha modified black rects over the texture
+			// to simulate darkness at distance
+			//fill(0, map(1 / d, 0, 1, 255, 0));
+			//rect((i + 0.5) * raywidth, 0, raywidth, height / d);
+			// render a rectangle with the calculated wall height
+			/*
 			fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
 			
 			rect(
@@ -484,9 +481,9 @@ function render3DProjectedWalls() {
 			   (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
 			   WALL_STRIP_WIDTH,
 			   wallStripHeight
-			);
+			);*/
 			
-			//image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
+			image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
 		}
 }
 
