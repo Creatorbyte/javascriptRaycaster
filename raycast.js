@@ -23,7 +23,7 @@ var markery = 0;
 let img;
 
 function preload(){
-	img = loadImage("assets/walltex2.gif");
+	img = loadImage("assets/walltex4.gif");
 }
 
 class Map {
@@ -418,24 +418,24 @@ function render3DProjectedWalls() {
         var wallStripHeight = (TILE_SIZE / correctWallDistance) * distanceProjectionPlane;
 
         // compute the transparency based on the wall distance
-        var alpha = 200 / correctWallDistance;
+        var alpha = 200 / (correctWallDistance);
 
 
     if(ray.wasHitVertical) {
         // set the correct color based on the wall hit grid content (1=Red, 2=Green, 3=Blue)
-        var colorR =  ray.hitWallColor == -1 ? 200 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
-        var colorG =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
-        var colorB =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 200 : ray.hitWallColor == 2 ? 180 : ray.hitWallColor == 3 ? 160 : 255;
+        var colorR =  ray.hitWallColor == -1 ? 255 : ray.hitWallColor == 1 ? 50 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
+        var colorG =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 50 : ray.hitWallColor == 3 ? 0 : 255;
+        var colorB =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 50 : 255;
         } else {
 
-        var colorR =  ray.hitWallColor == -1 ? 180 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
-        var colorG =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
-        var colorB =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 190 : ray.hitWallColor == 2 ? 170 : ray.hitWallColor == 3 ? 150 : 255;
+        var colorR =  ray.hitWallColor == -1 ? 255 : ray.hitWallColor == 1 ? 40 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 0 : 255;
+        var colorG =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 40 : ray.hitWallColor == 3 ? 0 : 255;
+        var colorB =  ray.hitWallColor == -1 ? 0 : ray.hitWallColor == 1 ? 0 : ray.hitWallColor == 2 ? 0 : ray.hitWallColor == 3 ? 40 : 255;
 
     }
 
 	noStroke();
-    fill(0,0,60);
+    fill(40,20,20);
     rect(
            (i) * WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2),
@@ -443,7 +443,7 @@ function render3DProjectedWalls() {
            WINDOW_HEIGHT
         );
 
-    fill(0,0,0);
+    fill(0,0,30);
     rect(
            (i) * WALL_STRIP_WIDTH,
            0,
@@ -451,39 +451,38 @@ function render3DProjectedWalls() {
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2)
         );
 
-	let sampleX = Math.abs(ray.wallHitX - Math.floor(ray.wallHitX));
+	let sampleX = Math.abs((ray.wallHitX/TILE_SIZE) - Math.floor((ray.wallHitX/TILE_SIZE)));
                     if (sampleX < 0.001 || sampleX > 0.999) {
-                        sampleX = Math.abs(ray.wallHitY - Math.floor(ray.wallHitY));
+                        sampleX = Math.abs((ray.wallHitY/TILE_SIZE) - Math.floor((ray.wallHitY/TILE_SIZE)));
                     }
 
-		imageMode(CENTER);
-		blocktex = img;
+    imageMode(CENTER);
+    blocktex = img;
 
-		image(blocktex,
-			(i) * WALL_STRIP_WIDTH,
-			(WINDOW_HEIGHT / 2) ,//- (wallStripHeight/4)
-			WALL_STRIP_WIDTH,
-			wallStripHeight,
-			int(sampleX * blocktex.width),
-			0,
-			1,
-			blocktex.height);
-			// draw alpha modified black rects over the texture
-			// to simulate darkness at distance
-			//fill(0, map(1 / d, 0, 1, 255, 0));
-			//rect((i + 0.5) * raywidth, 0, raywidth, height / d);
-			// render a rectangle with the calculated wall height
-			/*
-			fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
+    image(blocktex,
+        (i+0.5) * WALL_STRIP_WIDTH,
+        (WINDOW_HEIGHT / 2),//- (wallStripHeight/4)
+        WALL_STRIP_WIDTH,
+        wallStripHeight,
+        int((sampleX * blocktex.width)),
+        0,
+        1,
+        blocktex.height);
+        // draw alpha modified black rects over the texture
+        // to simulate darkness at distance
+        //fill(0, map(1 / d, 0, 1, 255, 0));
+        //rect((i + 0.5) * raywidth, 0, raywidth, height / d);
+        // render a rectangle with the calculated wall height
+        /*noStroke();
+        fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
+        rect(
+            (i) * WALL_STRIP_WIDTH,
+            (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
+            WALL_STRIP_WIDTH,
+            wallStripHeight
+        );*/
 
-			rect(
-			   (i) * WALL_STRIP_WIDTH,
-			   (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
-			   WALL_STRIP_WIDTH,
-			   wallStripHeight
-			);*/
-
-			//image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
+        //image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
 		}
 }
 
