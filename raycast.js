@@ -23,7 +23,7 @@ var markery = 0;
 let img;
 
 function preload(){
-	img = loadImage("assets/walltex4.gif");
+	img = loadImage("assets/walltex3.gif");
 }
 
 class Map {
@@ -457,6 +457,7 @@ function render3DProjectedWalls() {
                     }
 
     imageMode(CENTER);
+    noSmooth();
     blocktex = img;
 
     image(blocktex,
