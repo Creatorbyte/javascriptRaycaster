@@ -419,7 +419,7 @@ function render3DProjectedWalls() {
         var wallStripHeight = (TILE_SIZE / correctWallDistance) * distanceProjectionPlane;
 
         // compute the transparency based on the wall distance
-        var alpha = (correctWallDistance)/200;
+        var alpha = (correctWallDistance)/500;
 
 
     if(ray.wasHitVertical) {
@@ -436,7 +436,7 @@ function render3DProjectedWalls() {
     }
 
 	noStroke();
-    fill(40,20,20);// 40 20 20
+    fill(11,44,28);// 40 20 20 - 40 40 40
     rect(
            (i) * WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2),
@@ -470,13 +470,10 @@ function render3DProjectedWalls() {
         0,
         1,
         blocktex.height);
-        // draw alpha modified black rects over the texture
-        // to simulate darkness at distance
-        //fill(0, map(1 / d, 0, 1, 255, 0));
-        //rect((i + 0.5) * raywidth, 0, raywidth, height / d);
+
         // render a rectangle with the calculated wall height
         noStroke();
-        fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + 0.25 + ")");
+        fill("rgba(" + 0 + ", " + 0 + ", " + 0 + ", " + alpha + ")");
         rect(
             (i) * WALL_STRIP_WIDTH,
             (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
