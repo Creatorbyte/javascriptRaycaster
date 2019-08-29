@@ -9,7 +9,7 @@ const WINDOW_HEIGHT = MAP_NUM_ROWS * TILE_SIZE;
 
 const FOV_ANGLE = 60 * (Math.PI / 180);
 
-const WALL_STRIP_WIDTH = 1;
+const WALL_STRIP_WIDTH = 1;//8 looks pretty good for low-res
 const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
 const CONST_MINIMAP_SCALE_FACTOR = 0.25;
 var MINIMAP_SCALE_FACTOR = 0.25;
@@ -105,8 +105,9 @@ class Map {
 				} else {
 					 var tileColor = "#000"
 				}
+                //noStroke();//may or may not be this way in final version
                 stroke("#222");
-        //noStroke();
+                strokeWeight(MINIMAP_SCALE_FACTOR);
                 fill(tileColor);
                 rect(
                     MINIMAP_SCALE_FACTOR * tileX,
@@ -156,8 +157,8 @@ class Player {
         line(
             MINIMAP_SCALE_FACTOR * this.x,
             MINIMAP_SCALE_FACTOR * this.y,
-            MINIMAP_SCALE_FACTOR * (this.x + Math.cos(this.rotationAngle) * 30),
-            MINIMAP_SCALE_FACTOR * (this.y + Math.sin(this.rotationAngle) * 30)
+            MINIMAP_SCALE_FACTOR * (this.x + Math.cos(this.rotationAngle) * 10),
+            MINIMAP_SCALE_FACTOR * (this.y + Math.sin(this.rotationAngle) * 10)
         );
     }
 }
