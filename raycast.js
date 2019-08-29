@@ -12,7 +12,7 @@ const FOV_ANGLE = 60 * (Math.PI / 180);
 const WALL_STRIP_WIDTH = 1;
 const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
 const CONST_MINIMAP_SCALE_FACTOR = 0.25;
-var MINIMAP_SCALE_FACTOR = 0.1;
+var MINIMAP_SCALE_FACTOR = 0.25;
 
 var markerx = 0;
 var markery = 0;
@@ -451,9 +451,9 @@ function render3DProjectedWalls() {
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2)
         );
 
-	let sampleX = Math.abs(this.ray.wallHitX - Math.floor(this.ray.wallHitX));
+	let sampleX = Math.abs(ray.wallHitX - Math.floor(ray.wallHitX));
                     if (sampleX < 0.001 || sampleX > 0.999) {
-                        sampleX = Math.abs(this.ray.wallHitY - Math.floor(this.ray.wallHitY));
+                        sampleX = Math.abs(ray.wallHitY - Math.floor(ray.wallHitY));
                     }
 
 		imageMode(CENTER);
@@ -502,7 +502,7 @@ function distanceBetweenPoints(x1, y1, x2, y2) {
 
 
 function setup() {
-	//img = loadImage("walltex.gif");
+    //img = loadImage("walltex.gif");
     createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 }
