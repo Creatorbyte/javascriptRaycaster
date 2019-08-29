@@ -419,7 +419,7 @@ function render3DProjectedWalls() {
         var wallStripHeight = (TILE_SIZE / correctWallDistance) * distanceProjectionPlane;
 
         // compute the transparency based on the wall distance
-        var alpha = 200 / (correctWallDistance);
+        var alpha = (correctWallDistance)/200;
 
 
     if(ray.wasHitVertical) {
@@ -436,7 +436,7 @@ function render3DProjectedWalls() {
     }
 
 	noStroke();
-    fill(40,20,20);
+    fill(40,20,20);// 40 20 20
     rect(
            (i) * WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2),
@@ -475,14 +475,14 @@ function render3DProjectedWalls() {
         //fill(0, map(1 / d, 0, 1, 255, 0));
         //rect((i + 0.5) * raywidth, 0, raywidth, height / d);
         // render a rectangle with the calculated wall height
-        /*noStroke();
-        fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
+        noStroke();
+        fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + 0.25 + ")");
         rect(
             (i) * WALL_STRIP_WIDTH,
             (WINDOW_HEIGHT / 2) - (wallStripHeight / 2),
             WALL_STRIP_WIDTH,
             wallStripHeight
-        );*/
+        );
 
         //image(img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 16, 16);
 		}
