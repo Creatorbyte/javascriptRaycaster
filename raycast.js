@@ -23,7 +23,7 @@ var markery = 0;
 let img;
 
 function preload(){
-	img = loadImage("assets/walltex3.gif");
+	img = loadImage("assets/walltex2.gif");
 }
 
 class Map {
@@ -436,7 +436,7 @@ function render3DProjectedWalls() {
     }
 
 	noStroke();
-    fill(11,44,28);// 40 20 20 - 40 40 40
+    fill(50,30,20);//11 44 28 - 40 20 20 - 40 40 40
     rect(
            (i) * WALL_STRIP_WIDTH,
            (WINDOW_HEIGHT / 2) + (wallStripHeight/2),
