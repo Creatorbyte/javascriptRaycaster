@@ -21,4 +21,4 @@ TODO:
 - Variable height walls(Doom Style!)
 - Variable player height to allow jumping and stairs
 - Possibly non-orthogonal walls
-- Refactor and code cleanup(yeah right!)
+- Refactor and code cleanup(Ha! yeah right!)
