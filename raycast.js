@@ -289,12 +289,13 @@ class Ray {
 
       if(this.Id == Math.floor(NUM_RAYS/2) && player.breakNearestBlock != 0){
 		console.log("tried to change")
+        console.log(this.distance)
 
 		if(player.breakNearestBlock == 1 && grid.getWallContentAt(this.wallHitX+(2)*cos(this.rayAngle), this.wallHitY+(2)*sin(this.rayAngle))!=-1){
 			grid.setWallContentAt(this.wallHitX+(2)*cos(this.rayAngle), this.wallHitY+(2)*sin(this.rayAngle),0);
-		}else if(player.breakNearestBlock == 2){
+		}else if(this.distance > 2*TILE_SIZE && player.breakNearestBlock == 2){
 			grid.setWallContentAt(this.wallHitX-(2)*cos(this.rayAngle), this.wallHitY-(2)*sin(this.rayAngle),3);
-		} else if(player.breakNearestBlock == 3){
+		} else if(this.distance > 2*TILE_SIZE && player.breakNearestBlock == 3){
 			grid.setWallContentAt(this.wallHitX+(2)*cos(this.rayAngle), this.wallHitY+(2)*sin(this.rayAngle),3);
 		}
         player.breakNearestBlock = 0;
